@@ -117,5 +117,3 @@ print("    System Disk:")
 print("        Total:", all["System Disk Total"])
 print("        Used:", all["System Disk Used"])
 print("        Free:", all["System Disk Free"])
-while 1:
-    pass

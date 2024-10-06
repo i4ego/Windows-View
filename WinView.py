@@ -83,7 +83,7 @@ all = {
 "System Disk Free" : correct_size(C.free)
 }
 print("OS:")
-print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
+print("    OS:", all['OSname'], all["OSrelease"], f"({all['OS Version']})")
 print(f"    {all["OSname"]} Product Key:", all["OS Product Key"])
 print("Users:")
 print("    This User:", all["User"])

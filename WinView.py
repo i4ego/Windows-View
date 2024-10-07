@@ -1,5 +1,11 @@
 #THIS SCRIPT WAS TESTED ON THE PYTHON VERSION 3.12.6
-#IT MAY NOT WORK ON VERSIONS LATER OR LATER
+#IT MAY NOT WORK ON VERSIONS LATER
+#PLEASE, INSTALL ALL PACKAGES
+#    pip install uuid
+#    pip install requests
+#    pip install psutil
+#OR 
+#    pip install uuid requests psutil
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: fel.bogomolov@yandex.ru
 import getpass
 import os

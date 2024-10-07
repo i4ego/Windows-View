@@ -51,7 +51,7 @@ ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\Curre
 ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 vpnapiio_key = "e21de3cd57104f3fbfdaf2cde703d240"
-vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo["ip"]}?key={vpnapiio_key}").text)
+vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
 AllUsers = []
 all = {
 "OSname" : osname,
@@ -85,8 +85,8 @@ all = {
 "System Disk Free" : correct_size(C.free)
 }
 print("OS:")
-print("    OS:", all['OSname'], all["OSrelease"], f"({all['OS Version']})")
-print(f"    {all["OSname"]} Product Key:", all["OS Product Key"])
+print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
+print(f"    {all['OSname']} Product Key:", all["OS Product Key"])
 print("Users:")
 print("    This User:", all["User"])
 print("Connections:")

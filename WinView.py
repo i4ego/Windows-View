@@ -9,6 +9,9 @@
 #    pip install uuid requests psutil
 
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: fel.bogomolov@yandex.ru
+
+
+#imports
 import getpass
 import os
 import time
@@ -20,24 +23,29 @@ from uuid import getnode as getmac
 import psutil
 import winreg
 import json
-def correct_size(bts):
+
+#functions
+def correct_size(bts): #convert bits
     size = 1024
     for item in ["", "Kb", "Mb", "Gb", "Tb", "Pb"]:
         if bts < size:
             return f"{bts:.2f}{item}"
         bts /= size
 timeout = 1
-def is_cnx_active():
+
+def is_cnx_active(): #checking internet connection
     try:
         requests.head("https://google.com")
         return True
     except: 
         return False
-while True:
+while True: #waiting for internet connection
     if is_cnx_active() is True:
         break
     else:
         pass
+      
+#system data
 osinfo = platform.uname()
 architecture = platform.architecture()
 name = getpass.getuser()
@@ -61,6 +69,8 @@ ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 vpnapiio_key = "e21de3cd57104f3fbfdaf2cde703d240"
 vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
+
+#full information of system
 all = {
 "OSname" : osname,
 "OSrelease" : release,
@@ -92,6 +102,8 @@ all = {
 "System Disk Used" : correct_size(C.used),
 "System Disk Free" : correct_size(C.free)
 }
+
+#output to the console
 print("OS:")
 print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
 print(f"    {all['OSname']} Product Key:", all["OS Product Key"])

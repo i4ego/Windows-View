@@ -25,7 +25,7 @@ import winreg
 import json
 
 #functions
-def correct_size(bts): #convert bits
+def correct_size(bts): #convert bytes
     size = 1024
     for item in ["", "Kb", "Mb", "Gb", "Tb", "Pb"]:
         if bts < size:

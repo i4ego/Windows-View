@@ -9,6 +9,7 @@
 #    pip install uuid requests psutil
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: fel.bogomolov@yandex.ru
+#This is a smaller version of the "WindowsView" script
 
 
 #imports

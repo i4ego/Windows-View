@@ -101,6 +101,19 @@ all = {
 "System Disk Free" : correct_size(C.free)
 }
 
+global choice
+try:
+    print("Windows-View by FeliBog")
+    print("[1] Continue \n [2] Exit")
+    choice = input(">")
+    while choice != "1" or input(">") != "2":
+        choice = input(">")
+except:
+    raise SystemExit
+if choice = "2":
+    raise SystemExit
+
+
 #output to the console
 print("Windows-View \nCopyright (c) 2024 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/tree/main-latest \n \nOS:")
 print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")

@@ -10,4 +10,4 @@ This code does not work with Unix, Linux, and other operating systems other than
 
 The names of all necessary modules are in the file [`req.txt`](https://github.com/FeliBog/Windows-View/blob/main/req.txt)
 
-Latest version: 1.0  
+Latest version: 1.0 (Update 1)

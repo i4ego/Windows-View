@@ -10,6 +10,7 @@
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: felibog@bk.ru
 
+print("Loading. It can take 30+ seconds. \n\n")
 
 #imports
 import getpass
@@ -68,9 +69,6 @@ ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\Curre
 ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 
-vpnapiio_key = "e21de3cd57104f3fbfdaf2cde703d240" # API key from vpnapi.io
-
-vpninfo = json.loads(requests.get(f"https://vpnapi.io/api/{ipinfo['ip']}?key={vpnapiio_key}").text)
 
 #full information of system
 all = {
@@ -83,8 +81,6 @@ all = {
 "Public IP" : ipinfo["ip"],
 "Host" : host,
 "MAC" : mac,
-"VPN" : vpninfo["security"]["vpn"],
-"Proxy" : vpninfo["security"]["proxy"],
 "Country" : ipinfo["country"],
 "Region" : ipinfo["region"],
 "City" : ipinfo["city"],
@@ -101,8 +97,19 @@ all = {
 "System Disk Free" : correct_size(C.free)
 }
 
+os.system("cls")
+
+choice = str()
+try:
+    print("Windows-View by FeliBog")
+    getpass.getpass("Enter to continue, Ctrl+C to exit.")
+except:
+    raise SystemExit
+
+os.system("cls")
+
 #output to the console
-print("Windows-View \nCopyright (c) 2024 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/tree/main-latest \n \nOS:")
+print("Windows-View \nCopyright (c) 2024 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/ \n \nOS:")
 print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
 print(f"    {all['OSname']} Product Key:", all["OS Product Key"])
 print("Users:")
@@ -112,8 +119,6 @@ print("    Local IP:", all["Local IP"])
 print("    Public IP:", all["Public IP"])
 print("    Host:", all["Host"])
 print("    MAC:", all["MAC"])
-print("    VPN:", all["VPN"])
-print("    Proxy:", all["Proxy"])
 print("Public IP Info:")
 print("    Country:", all["Country"])
 print("    Region:", all["Region"])

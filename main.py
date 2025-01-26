@@ -61,7 +61,7 @@ version = osinfo.version
 mac = getmac()
 processorfrq = psutil.cpu_freq()
 timezone = psutil.boot_time()
-C = psutil.disk_usage("/")
+ram = psutil.virtual_memory()
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 
 #full information of system
@@ -84,9 +84,9 @@ all = {
 "Current Processor Frequency" : processorfrq.current,
 "Min Processor Frequency" : processorfrq.min,
 "Max Processor Frequency" : processorfrq.max,
-"System Disk Total" : correct_size(C.total),
-"System Disk Used" : correct_size(C.used),
-"System Disk Free" : correct_size(C.free)
+"RAM Total" : correct_size(ram.total),
+"RAM Used" : correct_size(ram.used),
+"RAM Free" : correct_size(ram.available)
 }
 
 os.system("cls")
@@ -122,8 +122,7 @@ print("    Processor frequency:")
 print("        Current:", all["Current Processor Frequency"])
 print("        Min:", all["Min Processor Frequency"])
 print("        Max:", all["Max Processor Frequency"])
-print("System:")
-print("    System Disk:")
-print("        Total:", all["System Disk Total"])
-print("        Used:", all["System Disk Used"])
-print("        Free:", all["System Disk Free"])
+print("Virtual Memory (RAM):")
+print("    Total:", all["RAM Total"])
+print("    Used:", all["RAM Used"])
+print("    Free:", all["RAM Free"])

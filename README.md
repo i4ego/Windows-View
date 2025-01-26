@@ -10,3 +10,8 @@ This code does not work with Unix, Linux, and other operating systems other than
 
 <div align="center">The names of all necessary modules are in the file <a href = "https://github.com/FeliBog/Windows-View/blob/main/req.txt">req.txt</a>.</div>
 <div align="center">You can download the modules with the command <code>pip install -r req.txt</code>.</div>
+
+<div align="center"><h2>Screenshots</h2></div>
+
+<img src="https://raw.githubusercontent.com/FeliBog/FeliBog/refs/heads/main/images/win-view1.png"></img>
+<img src="https://raw.githubusercontent.com/FeliBog/FeliBog/refs/heads/main/images/win-view2.png"></img>

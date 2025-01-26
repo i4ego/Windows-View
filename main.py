@@ -1,6 +1,8 @@
 #THIS SCRIPT WAS TESTED ON THE PYTHON VERSION 3.13.1
 #IT MAY NOT WORK ON VERSIONS LATER
 #
+#SET ENCCDING utf-8 (cp65001)
+#
 #PLEASE, INSTALL ALL PACKAGES
 #    pip install uuid
 #    pip install requests
@@ -93,7 +95,14 @@ os.system("cls")
 
 choice = str()
 try:
-    print("Windows-View by FeliBog")
+    print(rf"""
+                    __     __              ___                  ___
+\      / |  |\  |  |  \   /  \  \      /  \___      \    /  |  |     \      /
+ \    /  |  | \ |  |   |  |  |   \    /       |      \  /   |  |---   \    /
+  \/\/   |  |  \|  |__/   \__/    \/\/     ___/       \/    |  |___    \/\/ by felibog
+          
+on Python {platform.python_version()}
+""")
     getpass.getpass("Enter to continue, Ctrl+C to exit.")
 except:
     raise SystemExit

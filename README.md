@@ -4,9 +4,9 @@
   <img src="https://img.shields.io/github/license/FeliBog/Windows-View?style=plastic"/>
   <img src="https://tokei.rs/b1/github/FeliBog/Windows-View"/>
 </div>
-This code collects information about the Windows system. 
+<div align="center">This code collects information about the Windows system. 
 
-This code does not work with Unix, Linux, and other operating systems other than Windows
+This code does not work with Unix, Linux, and other operating systems other than Windows</div>
 
-The names of all necessary modules are in the file [`req.txt`](https://github.com/FeliBog/Windows-View/blob/main/req.txt)
-You can download the modules with the command `pip insatll -r req.txt`
+<div align="center">The names of all necessary modules are in the file <a href = "https://github.com/FeliBog/Windows-View/blob/main/req.txt">req.txt</a>.</div>
+<div align="center">You can download the modules with the command <code>pip install -r req.txt</code>.</div>

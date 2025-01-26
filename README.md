@@ -6,7 +6,7 @@
 </div>
 <div align="center">This code collects information about the Windows system. 
 
-This code does not work with Unix, Linux, and other operating systems other than Windows</div>
+Don't recommended to run this code on Unix, Linux, and other operating systems other than Windows</div>
 
 <div align="center">The names of all necessary modules are in the file <a href = "https://github.com/FeliBog/Windows-View/blob/main/req.txt">req.txt</a>.</div>
 <div align="center">You can download the modules with the command <code>pip install -r req.txt</code>.</div>

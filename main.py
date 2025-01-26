@@ -19,10 +19,8 @@ import time
 import platform
 import socket
 import requests
-import subprocess
 from uuid import getnode as getmac
 import psutil
-import winreg
 import json
 
 #functions
@@ -64,18 +62,13 @@ mac = getmac()
 processorfrq = psutil.cpu_freq()
 timezone = psutil.boot_time()
 C = psutil.disk_usage("/")
-Path = winreg.HKEY_LOCAL_MACHINE
-ProductKeyPath = winreg.OpenKeyEx(Path, r"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SoftwareProtectionPlatform")
-ProductKey = winreg.QueryValueEx(ProductKeyPath, "BackupProductKeyDefault")
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
-
 
 #full information of system
 all = {
 "OSname" : osname,
 "OSrelease" : release,
 "OS Version" : version,
-"OS Product Key" : ProductKey[0],
 "User" : name,
 "Local IP" : ip,
 "Public IP" : ipinfo["ip"],
@@ -86,7 +79,6 @@ all = {
 "City" : ipinfo["city"],
 "Postal code" : ipinfo["postal"],
 "Timezone" : ipinfo["timezone"],
-"Hostname" : ipinfo["hostname"],
 "Processor" : processor,
 "Architecture" : architecture[0],
 "Current Processor Frequency" : processorfrq.current,
@@ -109,9 +101,8 @@ except:
 os.system("cls")
 
 #output to the console
-print("Windows-View \nCopyright (c) 2024 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/ \n \nOS:")
+print("Windows-View \nCopyright (c) 2025 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/ \n \nOS:")
 print("    OS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
-print(f"    {all['OSname']} Product Key:", all["OS Product Key"])
 print("Users:")
 print("    This User:", all["User"])
 print("Connections:")
@@ -124,7 +115,6 @@ print("    Country:", all["Country"])
 print("    Region:", all["Region"])
 print("    City:", all["City"])
 print("    Timezone:", all["Timezone"])
-print("    Hostname:", all["Hostname"])
 print("Processor:")
 print("    Processor:", all["Processor"])
 print("    Architectre:", all["Architecture"])

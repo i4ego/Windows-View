@@ -6,9 +6,10 @@
 #PLEASE, INSTALL ALL PACKAGES
 #    pip install uuid
 #    pip install requests
+#    pip install gputil
 #    pip install psutil
 #OR 
-#    pip install uuid requests psutil
+#    pip install uuid requests psutil gputil
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: felibog@bk.ru
 

@@ -99,8 +99,7 @@ all = {
 "RAM Total" : correct_size(ram.total),
 "RAM Used" : correct_size(ram.used),
 "RAM Free" : correct_size(ram.available),
-"RAM Usage %" : f"{ram.percent}%",
-"List of GPU" : gpus
+"RAM Usage %" : f"{ram.percent}%"
 }
 
 os.system("cls")

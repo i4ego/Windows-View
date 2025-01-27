@@ -24,11 +24,12 @@ import requests
 from uuid import getnode as getmac
 import psutil
 import json
+import GPUtil
 
 #functions
 def correct_size(bts): #convert bytes
     size = 1024
-    for item in ["", "Kb", "Mb", "Gb", "Tb", "Pb"]:
+    for item in ["b", "Kb", "Mb", "Gb", "Tb", "Pb"]:
         if bts < size:
             return f"{bts:.2f}{item}"
         bts /= size
@@ -67,6 +68,8 @@ ram = psutil.virtual_memory()
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
 phisical_cores = psutil.cpu_count(False)
 logic_cores = psutil.cpu_count()
+cpu_usage = psutil.cpu_percent()
+gpus = GPUtil.getGPUs()
 
 
 #full information of system
@@ -86,6 +89,7 @@ all = {
 "Timezone" : ipinfo["timezone"],
 "Processor" : processor,
 "Architecture" : architecture[0],
+"CPU Usage %" : f"{cpu_usage}%",
 "Current Processor Frequency" : processorfrq.current,
 "Min Processor Frequency" : processorfrq.min,
 "Max Processor Frequency" : processorfrq.max,
@@ -95,7 +99,8 @@ all = {
 "RAM Total" : correct_size(ram.total),
 "RAM Used" : correct_size(ram.used),
 "RAM Free" : correct_size(ram.available),
-"RAM Usage %" : f"{ram.percent}%"
+"RAM Usage %" : f"{ram.percent}%",
+"List of GPU" : gpus
 }
 
 os.system("cls")
@@ -134,6 +139,7 @@ print("\tTimezone:", all["Timezone"])
 print("Processor:")
 print("\tProcessor:", all["Processor"])
 print("\tArchitectre:", all["Architecture"])
+print("\tUsage:", all["CPU Usage %"])
 print("\tProcessor frequency:")
 print("\t\tCurrent:", all["Current Processor Frequency"])
 print("\t\tMin:", all["Min Processor Frequency"])
@@ -147,3 +153,13 @@ print("\tTotal:", all["RAM Total"])
 print("\tUsed:", all["RAM Used"])
 print("\tFree:", all["RAM Free"])
 print("\tUsage (%):", all["RAM Usage %"])
+print("GPUs:")
+for gpu in gpus:
+    print(f"\t{gpu.name} (id = {gpu.id})")
+    print(f"\t\tGPU Load: {gpu.load*100}%")
+    print(f"\t\tMemory:")
+    print(f"\t\t\tTotal: {correct_size(gpu.memoryTotal*1024*1024)}")
+    print(f"\t\t\tUsed: {correct_size(gpu.memoryUsed*1024*1024)}")
+    print(f"\t\t\tFree: {correct_size(gpu.memoryFree*1024*1024)}")
+    print(f"\t\tTemperature: {gpu.temperature} °C")
+    print(f"\t\tUUID: {gpu.uuid}")

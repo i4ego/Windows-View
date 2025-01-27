@@ -65,6 +65,9 @@ processorfrq = psutil.cpu_freq()
 timezone = psutil.boot_time()
 ram = psutil.virtual_memory()
 ipinfo = json.loads(requests.get('http://ipinfo.io/json').text)
+phisical_cores = psutil.cpu_count(False)
+logic_cores = psutil.cpu_count()
+
 
 #full information of system
 all = {
@@ -86,9 +89,13 @@ all = {
 "Current Processor Frequency" : processorfrq.current,
 "Min Processor Frequency" : processorfrq.min,
 "Max Processor Frequency" : processorfrq.max,
+"Physical Cores" : phisical_cores,
+"Logical Cores" : logic_cores,
+"Threads By Core" : logic_cores//phisical_cores,
 "RAM Total" : correct_size(ram.total),
 "RAM Used" : correct_size(ram.used),
-"RAM Free" : correct_size(ram.available)
+"RAM Free" : correct_size(ram.available),
+"RAM Usage %" : f"{ram.percent}%"
 }
 
 os.system("cls")
@@ -131,7 +138,12 @@ print("\tProcessor frequency:")
 print("\t\tCurrent:", all["Current Processor Frequency"])
 print("\t\tMin:", all["Min Processor Frequency"])
 print("\t\tMax:", all["Max Processor Frequency"])
+print("\tCores:")
+print("\t\tPhysical:", all["Physical Cores"])
+print("\t\tLogical:", all["Logical Cores"])
+print("\t\tThreads by core:", all["Threads By Core"])
 print("Virtual Memory (RAM):")
 print("\tTotal:", all["RAM Total"])
 print("\tUsed:", all["RAM Used"])
 print("\tFree:", all["RAM Free"])
+print("\tUsage (%):", all["RAM Usage %"])

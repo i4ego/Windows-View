@@ -12,8 +12,11 @@
 #    pip install uuid requests psutil gputil
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: felibog@bk.ru
+#GITHUB: https://github.com/felibog/windows-view
 
-print("Loading. It can take 30+ seconds. \n\n")
+#MIT LICENSE
+
+print("Loading. It can take 30+ seconds.")
 
 #imports
 import getpass
@@ -27,7 +30,7 @@ import psutil
 import json
 import GPUtil
 import signal
-import subprocess
+from colorama import Fore, Style
 
 #functions
 def correct_size(bts): #convert bytes
@@ -43,6 +46,7 @@ def is_cnx_active(): #checking internet connection
         return True
     except: 
         return False
+
 a = "Waiting for internet connection..."
 while True: #waiting for internet connection
     if is_cnx_active() is True:
@@ -85,9 +89,9 @@ for i in disks:
     percent = size.percent; disk.append(percent)
     disk_info[i.device] = disk
 battery = psutil.sensors_battery()
-avaliable_os_signals_1 = (str(signal.valid_signals()).replace("{", "").replace("<", "").replace(">", "").replace("}", "").replace(" ", "").replace("Signals.", "").replace(":", " \t\t (")).split(",")
+avaliable_os_signals_1 = (str(signal.valid_signals()).replace("{", "").replace("<", "").replace(">", "").replace("}", "").replace(" ", "").replace("Signals.", "").replace(":", f"  {Style.DIM}\t\t (")).split(",")
 avaliable_os_signals = list()
-for i in avaliable_os_signals_1: i+=")"; avaliable_os_signals.append(i)
+for i in avaliable_os_signals_1: i+=f") {Style.RESET_ALL}"; avaliable_os_signals.append(i)
 active_users = psutil.users()
 boot_time = time.time() - psutil.boot_time()
 if boot_time < 3600: boot_time = str(boot_time//60) + "min"
@@ -136,12 +140,11 @@ try:
                     __     __              ___                  ___
 \      / |  |\  |  |  \   /  \  \      /  \___      \    /  |  |     \      /
  \    /  |  | \ |  |   |  |  |   \    /       |      \  /   |  |---   \    /
-  \/\/   |  |  \|  |__/   \__/    \/\/     ___/       \/    |  |___    \/\/ by felibog
-          
-on Python {platform.python_version()}
+  \/\/   |  |  \|  |__/   \__/    \/\/     ___/       \/    |  |___    \/\/ {Style.DIM}by felibog{Style.RESET_ALL}
 """)
     getpass.getpass("Enter to continue, Ctrl+C to exit.")
 except:
+    os.system("cls")
     raise SystemExit
 
 os.system("cls")
@@ -158,10 +161,10 @@ print("\tActive Users (Loginned In):")
 for i in all["Active Users"]:
     print(f"\t\t{i.name}")
 print("Connections:")
-print("\tLocal IP:", all["Local IP"])
-print("\tPublic IP:", all["Public IP"])
-print("\tHost:", all["Host"])
-print("\tMAC:", all["MAC"])
+print("\tLocal IP:",Style.DIM, all["Local IP"], Style.RESET_ALL)
+print("\tPublic IP:",Style.DIM, all["Public IP"], Style.RESET_ALL)
+print("\tHost:",Style.DIM, all["Host"], Style.RESET_ALL)
+print("\tMAC:",Style.DIM, all["MAC"],Style.RESET_ALL)
 print("Public IP Info:")
 print("\tCountry:", all["Country"])
 print("\tRegion:", all["Region"])
@@ -191,9 +194,9 @@ for gpu in gpus:
     print(f"\t\tGPU Load: {gpu.load*100}%")
     print(f"\t\tMemory:")
     print(f"\t\t\tTotal: {correct_size(gpu.memoryTotal*1024*1024)}")
-    print(f"\t\t\tUsed: {correct_size(gpu.memoryUsed*1024*1024)}")
-    print(f"\t\t\tFree: {correct_size(gpu.memoryFree*1024*1024)}")
-    print(f"\t\tTemperature: {gpu.temperature} ┬░C")
+    print(f"\t\t\tUsed: {Fore.RED}{correct_size(gpu.memoryUsed*1024*1024)}", Style.RESET_ALL)
+    print(f"\t\t\tFree: {Fore.GREEN}{correct_size(gpu.memoryFree*1024*1024)}", Style.RESET_ALL)
+    print(f"\t\tTemperature: {gpu.temperature} °C")
     print(f"\t\tUUID: {gpu.uuid}")
 print("Disks:")
 for i in disk_info:
@@ -202,15 +205,16 @@ for i in disk_info:
     print(f"\t\tFile System: {this_disk[1]}")
     print(f"\t\tMemory:")
     print(f"\t\t\tTotal: {correct_size(this_disk[2])}")
-    print(f"\t\t\tUsed: {correct_size(this_disk[3])}")
-    print(f"\t\t\tFree: {correct_size(this_disk[4])}")
+    print(f"\t\t\tUsed: {Fore.RED}{correct_size(this_disk[3])}", Style.RESET_ALL)
+    print(f"\t\t\tFree: {Fore.GREEN}{correct_size(this_disk[4])}", Style.RESET_ALL)
     print(f"\t\t\tPercent: {this_disk[5]}%")
 print("Power (Battery):")
 print("\tPercent:", str(all["Battery"].percent) + "%")
 if all["Battery"].secsleft != psutil.POWER_TIME_UNLIMITED:
-    if all["Battery"].secsleft/60 < 60: print("\tTime to discharge: ~" + str(all["Battery"].secsleft//60) + " min")
-    else: print("\tTime to discharge: ~" + str(all["Battery"].secsleft//60//60) + " h")
+    if all["Battery"].secsleft//60 < 60: print("\tTime to discharge: ~" + str(all["Battery"].secsleft//60) + " min")
+    else: print("\tTime to discharge: ~" + str(all["Battery"].secsleft/60//60) + " h")
 if all["Battery"].power_plugged == True:
     print("\tBattery is charging.")
 else:
     print("\tBattery is not charging.")
+print(Style.RESET_ALL)

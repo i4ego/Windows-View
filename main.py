@@ -7,8 +7,9 @@
 #    pip install uuid
 #    pip install requests
 #    pip install psutil
+#    pip install gputil
 #OR 
-#    pip install uuid requests psutil
+#    pip install uuid requests psutil gputil
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: felibog@bk.ru
 
@@ -26,7 +27,6 @@ import psutil
 import json
 import GPUtil
 import signal
-import sys
 
 #functions
 def correct_size(bts): #convert bytes
@@ -35,7 +35,6 @@ def correct_size(bts): #convert bytes
         if bts < size:
             return f"{bts:.2f}{item}"
         bts /= size
-timeout = 1
 
 def is_cnx_active(): #checking internet connection
     try:
@@ -52,7 +51,7 @@ while True: #waiting for internet connection
         print(a)
         time.sleep(1)
         os.system("cls")
-      
+
 #system data
 osinfo = platform.uname()
 architecture = platform.architecture()
@@ -85,7 +84,9 @@ for i in disks:
     percent = size.percent; disk.append(percent)
     disk_info[i.device] = disk
 battery = psutil.sensors_battery()
-avaliable_os_signals = str(signal.valid_signals()).replace("{", "").replace("<", "").replace(">", "").replace("}", "").replace(" ", "").replace("Signals.", "").replace(":", "\t——\t").split(",")
+avaliable_os_signals_1 = (str(signal.valid_signals()).replace("{", "").replace("<", "").replace(">", "").replace("}", "").replace(" ", "").replace("Signals.", "").replace(":", " \t\t (")).split(",")
+avaliable_os_signals = list()
+for i in avaliable_os_signals_1: i+=")"; avaliable_os_signals.append(i)
 active_users = psutil.users()
 
 #full information of system
@@ -144,7 +145,7 @@ print("Windows-View \nCopyright (c) 2025 Felix Bogomolov \nGitHub: https://githu
 print("\tOS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
 print("\tAvaliable Signals:")
 for i in all["Avaliable Signals"]:
-    print("\t\t ", i)
+    print(f"\t\t "+ i)
 print("Users:")
 print("\tThis User:", all["User"])
 print("\tActive Users (Loginned In):")
@@ -165,9 +166,9 @@ print("\tProcessor:", all["Processor"])
 print("\tArchitectre:", all["Architecture"])
 print("\tUsage:", all["CPU Usage %"])
 print("\tProcessor frequency:")
-print("\t\tCurrent:", str(all["Current Processor Frequency"]) + " Mhz")
-print("\t\tMin:", str(all["Min Processor Frequency"]) + " Mhz")
-print("\t\tMax:", str(all["Max Processor Frequency"]) + " Mhz")
+print("\t\tCurrent:", str((all["Current Processor Frequency"]/1000)) + " Ghz")
+print("\t\tMin:", str(all["Min Processor Frequency"]/1000) + " Ghz")
+print("\t\tMax:", str(all["Max Processor Frequency"]/1000) + " Ghz")
 print("\tCores:")
 print("\t\tPhysical:", all["Physical Cores"])
 print("\t\tLogical:", all["Logical Cores"])

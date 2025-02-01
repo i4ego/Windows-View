@@ -27,6 +27,7 @@ import psutil
 import json
 import GPUtil
 import signal
+import subprocess
 
 #functions
 def correct_size(bts): #convert bytes
@@ -88,6 +89,10 @@ avaliable_os_signals_1 = (str(signal.valid_signals()).replace("{", "").replace("
 avaliable_os_signals = list()
 for i in avaliable_os_signals_1: i+=")"; avaliable_os_signals.append(i)
 active_users = psutil.users()
+boot_time = time.time() - psutil.boot_time()
+if boot_time < 3600: boot_time = str(boot_time//60) + "min"
+elif boot_time < 86400: boot_time = str(boot_time/60//60) + "h"
+else: boot_time = str(boot_time/60/60//24) + "d"
 
 #full information of system
 all = {
@@ -109,6 +114,7 @@ all = {
 "Processor" : processor,
 "Architecture" : architecture[0],
 "CPU Usage %" : f"{cpu_usage}%",
+"Boot Time" : boot_time,
 "Current Processor Frequency" : processorfrq.current,
 "Min Processor Frequency" : processorfrq.min,
 "Max Processor Frequency" : processorfrq.max,
@@ -165,6 +171,7 @@ print("Processor:")
 print("\tProcessor:", all["Processor"])
 print("\tArchitectre:", all["Architecture"])
 print("\tUsage:", all["CPU Usage %"])
+print("\tBoot Time:", all["Boot Time"])
 print("\tProcessor frequency:")
 print("\t\tCurrent:", str((all["Current Processor Frequency"]/1000)) + " Ghz")
 print("\t\tMin:", str(all["Min Processor Frequency"]/1000) + " Ghz")
@@ -186,7 +193,7 @@ for gpu in gpus:
     print(f"\t\t\tTotal: {correct_size(gpu.memoryTotal*1024*1024)}")
     print(f"\t\t\tUsed: {correct_size(gpu.memoryUsed*1024*1024)}")
     print(f"\t\t\tFree: {correct_size(gpu.memoryFree*1024*1024)}")
-    print(f"\t\tTemperature: {gpu.temperature} °C")
+    print(f"\t\tTemperature: {gpu.temperature} ┬░C")
     print(f"\t\tUUID: {gpu.uuid}")
 print("Disks:")
 for i in disk_info:

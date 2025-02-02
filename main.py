@@ -8,8 +8,9 @@
 #    pip install requests
 #    pip install psutil
 #    pip install gputil
+#    pip install colorama
 #OR 
-#    pip install uuid requests psutil gputil
+#    pip install uuid requests psutil gputil colorama
 #
 #IF CODE DOESN'T WORK, PLEASE, WRITE TO ME: felibog@bk.ru
 #GITHUB: https://github.com/felibog/windows-view
@@ -30,7 +31,7 @@ import psutil
 import json
 import GPUtil
 import signal
-from colorama import Fore, Style
+from colorama import Fore, Style, Back
 
 #functions
 def correct_size(bts): #convert bytes
@@ -136,7 +137,7 @@ os.system("cls")
 
 choice = str()
 try:
-    print(rf"""
+    print(rf"""{Style.BRIGHT}
                     __     __              ___                  ___
 \      / |  |\  |  |  \   /  \  \      /  \___      \    /  |  |     \      /
  \    /  |  | \ |  |   |  |  |   \    /       |      \  /   |  |---   \    /
@@ -146,11 +147,11 @@ try:
 except:
     os.system("cls")
     raise SystemExit
-
+print(Style.BRIGHT)
 os.system("cls")
 
 #output to the console
-print("Windows-View \nCopyright (c) 2025 Felix Bogomolov \nGitHub: https://github.com/FeliBog/Windows-View/ \n \nOS:")
+print(f"{Fore.BLACK}{Back.WHITE}Windows-View \nCopyright (c) 2025 Felix Bogomolov \nGitHub: {Fore.BLUE}https://github.com/FeliBog/Windows-View/ {Style.RESET_ALL}\n \nOS:")
 print("\tOS:", all["OSname"], all["OSrelease"], f"({all['OS Version']})")
 print("\tAvaliable Signals:")
 for i in all["Avaliable Signals"]:
